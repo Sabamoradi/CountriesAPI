@@ -19,9 +19,12 @@
   </div>
 </template>
 <script>
-import TopMenu from "@/components/TopMenu";
-import TextInput from "@/components/global/Input";
-import HomeCard from "@/components/HomeCard";
+import TopMenu from '@/components/TopMenu';
+
+import TextInput from '@/components/global/Input';
+
+import HomeCard from '@/components/HomeCard';
+
 export default {
   components: {
     TopMenu,

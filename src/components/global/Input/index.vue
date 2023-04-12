@@ -21,25 +21,25 @@ export default {
       default: false,
     },
     type: {
-      default: "text",
+      default: 'text',
       type: String,
     },
     placeText: {
-      default: "",
+      default: '',
       type: String,
     },
     value: {
-      default: "",
+      default: '',
       type: String,
     },
     name: {
-      default: "",
+      default: '',
       type: String,
     },
   },
   data() {
     return {
-      innerValue: "",
+      innerValue: '',
     };
   },
 };
