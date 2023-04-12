@@ -1,39 +1,45 @@
 <template>
   <div>
     <top-menu />
-    <template v-if="showLoading">
-      loading
-    </template>
-    <template v-else>
-      <div class="second-section">
-        <div class="container second-wrapper">
-          <div class="left-section">
-            <text-input :placeText="'search for a country ...'" />
-          </div>
-          <div class="right-section">
-            <filters :listItem="listItem" />
-          </div>
+    <div class="second-section">
+      <div class="container second-wrapper">
+        <div class="left-section">
+          <text-input :placeText="'search for a country ...'" />
+        </div>
+        <div class="right-section">
+          <filters
+            :listItem="listItem"
+            @setItemData="setItemData"
+            @resetAllFilter="fetchCountriesData"
+          />
         </div>
       </div>
-      <div class="third-section">
+    </div>
+    <div class="third-section">
+      <template v-if="showLoading"> loading </template>
+      <template v-else>
         <div class="container">
           <div class="cards-wrapper">
-            <home-card v-for="index in listData" :itemsData="index" :key="`${index.name.common}-card`" />
+            <home-card
+              v-for="index in listData"
+              :itemsData="index"
+              :key="`${index.name.common}-card`"
+            />
           </div>
         </div>
-      </div>
-    </template>
+      </template>
+    </div>
   </div>
 </template>
 
 <script>
-import TopMenu from '@/components/TopMenu';
+import TopMenu from "@/components/TopMenu";
 
-import TextInput from '@/components/global/Input';
+import TextInput from "@/components/global/Input";
 
-import HomeCard from '@/components/HomeCard';
+import HomeCard from "@/components/HomeCard";
 
-import Filters from '@/components/global/Filters';
+import Filters from "@/components/global/Filters";
 
 export default {
   components: {
@@ -47,27 +53,27 @@ export default {
       listItem: [
         {
           id: 1,
-          text: 'Africa',
+          text: "africa",
         },
         {
           id: 2,
-          text: 'America',
+          text: "america",
         },
         {
           id: 3,
-          text: 'Asia',
+          text: "asia",
         },
         {
           id: 4,
-          text: 'Europe',
+          text: "europe",
         },
         {
           id: 5,
-          text: 'Oceania',
+          text: "oceania",
         },
       ],
-      showLoading:true,
-      listData: []
+      showLoading: false,
+      listData: [],
     };
   },
   created() {
@@ -75,13 +81,23 @@ export default {
   },
   methods: {
     async fetchCountriesData() {
+      this.showLoading = true;
       try {
-        const respose = await this.$httpCall.get('/all');
-        if(respose && respose.status === 200){
-          this.showLoading = false
-          this.listData = respose.data
+        const respose = await this.$httpCall.get("/all");
+        if (respose && respose.status === 200) {
+          this.showLoading = false;
+          this.listData = respose.data;
         }
-        
+      } catch (error) {}
+    },
+    async setItemData(val) {
+      this.showLoading = true;
+      try {
+        const respose = await this.$httpCall.get(`/region/${val.text}`);
+        if (respose && respose.status === 200) {
+          this.showLoading = false;
+          this.listData = respose.data;
+        }
       } catch (error) {}
     },
   },

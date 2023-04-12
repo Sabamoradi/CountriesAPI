@@ -2,7 +2,7 @@
   <div class="home-item">
     <div class="card_wrapper">
       <div class="card_img">
-        <img :src="itemsData.flags.png" :alt="itemsData.flags.alt" loading="lazy" @error="onLoadError" />
+        <img :src="itemsData.flags.png" :alt="itemsData.flags.alt" loading="lazy" />
       </div>
       <div class="card_text">
         <p class="title font-bold size-16">{{ itemsData.name.official }}</p>
@@ -36,11 +36,6 @@ export default {
       type: Object,
     },
   },
-  methods: {
-    onLoadError() {
-      console.log('here');
-    }
-  }
 };
 </script>
 <style scoped>

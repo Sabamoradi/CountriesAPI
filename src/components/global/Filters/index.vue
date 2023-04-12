@@ -46,10 +46,12 @@ export default {
       this.regionText = value.text;
       this.openMenu = false;
       this.resetFilter = true;
+      this.$emit('setItemData', value);
     },
     resetAllFilter() {
       this.regionText = 'Filter by Region';
       this.resetFilter = false;
+      this.$emit('resetAllFilter');
     },
   },
 };
