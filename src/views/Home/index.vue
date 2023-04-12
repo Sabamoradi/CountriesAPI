@@ -7,7 +7,7 @@
           <text-input :placeText="'search for a country ...'" />
         </div>
         <div class="right-section">
-          <filters/>
+          <filters :listItem="listItem"/>
         </div>
       </div>
     </div>
@@ -37,6 +37,32 @@ export default {
     HomeCard,
     Filters,
   },
+  data(){
+    return{
+      listItem:[
+        {
+          id:1,
+          text:'Africa'
+        },
+        {
+          id:2,
+          text:'America'
+        },
+        {
+          id:3,
+          text:'Asia'
+        },
+        {
+          id:4,
+          text:'Europe'
+        },
+        {
+          id:5,
+          text:'Oceania'
+        },
+      ]
+    }
+  }
 };
 </script>
 <style scoped>
