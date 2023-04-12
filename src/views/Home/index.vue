@@ -1,23 +1,28 @@
 <template>
   <div>
     <top-menu />
-    <div class="second-section">
-      <div class="container second-wrapper">
-        <div class="left-section">
-          <text-input :placeText="'search for a country ...'" />
-        </div>
-        <div class="right-section">
-          <filters :listItem="listItem"/>
-        </div>
-      </div>
-    </div>
-    <div class="third-section">
-      <div class="container">
-        <div class="cards-wrapper">
-          <home-card v-for="index in 6" :key="`${index}-card`" />
+    <template v-if="showLoading">
+      loading
+    </template>
+    <template v-else>
+      <div class="second-section">
+        <div class="container second-wrapper">
+          <div class="left-section">
+            <text-input :placeText="'search for a country ...'" />
+          </div>
+          <div class="right-section">
+            <filters :listItem="listItem" />
+          </div>
         </div>
       </div>
-    </div>
+      <div class="third-section">
+        <div class="container">
+          <div class="cards-wrapper">
+            <home-card v-for="index in listData" :itemsData="index" :key="`${index.name.common}-card`" />
+          </div>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -61,7 +66,24 @@ export default {
           text: 'Oceania',
         },
       ],
+      showLoading:true,
+      listData: []
     };
+  },
+  created() {
+    this.fetchCountriesData();
+  },
+  methods: {
+    async fetchCountriesData() {
+      try {
+        const respose = await this.$httpCall.get('/all');
+        if(respose && respose.status === 200){
+          this.showLoading = false
+          this.listData = respose.data
+        }
+        
+      } catch (error) {}
+    },
   },
 };
 </script>
@@ -73,7 +95,7 @@ export default {
 .left-section {
   width: 40%;
 }
-.right-section{
+.right-section {
   width: 18%;
 }
 .cards-wrapper {
@@ -82,29 +104,29 @@ export default {
   flex-wrap: wrap;
   gap: 50px;
 }
-.second-wrapper{
+.second-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 @media (max-width: 1199px) {
-  .right-section{
+  .right-section {
     width: 22%;
   }
   .cards-wrapper {
-    gap:75px
+    gap: 75px;
   }
 }
-@media (max-width: 992px){
-  .cards-wrapper{
-    gap:10px;
+@media (max-width: 992px) {
+  .cards-wrapper {
+    gap: 10px;
     justify-content: space-between;
   }
-  .second-wrapper{
+  .second-wrapper {
     flex-direction: column;
     align-items: flex-start;
   }
-  .right-section{
+  .right-section {
     width: 35%;
     margin-top: 40px;
   }
@@ -112,9 +134,9 @@ export default {
     width: 100%;
   }
 }
-@media (max-width: 592px){
-.right-section{
-  width: 80%;
-}
+@media (max-width: 592px) {
+  .right-section {
+    width: 80%;
+  }
 }
 </style>

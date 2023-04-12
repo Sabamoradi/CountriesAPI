@@ -1,16 +1,48 @@
 <template>
   <div class="home-item">
     <div class="card_wrapper">
-      <div class="card_img"></div>
+      <div class="card_img">
+        <img :src="itemsData.flags.png" :alt="itemsData.flags.alt" loading="lazy" @error="onLoadError" />
+      </div>
       <div class="card_text">
-        <p class="title font-bold size-16">germay</p>
-        <p class="mt-2 size-14 font-semi-bold">Population:1111</p>
-        <p class="mt-2 size-14 font-semi-bold">Population:1111</p>
-        <p class="mt-2 size-14 font-semi-bold">Population:1111</p>
+        <p class="title font-bold size-16">{{ itemsData.name.official }}</p>
+        <div class="mt-2 size-14 card-title">
+          <span class="font-bold"> Population: </span>
+          <p class="font-semi-bold">
+            {{ itemsData.population }}
+          </p>
+        </div>
+        <div class="mt-2 size-14 card-title">
+          <span class="font-bold"> Region: </span>
+          <p class="font-semi-bold">
+            {{ itemsData.region }}
+          </p>
+        </div>
+        <div class="mt-2 size-14 card-title">
+          <span class="font-bold"> Capital: </span>
+          <p class="font-semi-bold">
+            {{ itemsData.capital ? itemsData.capital[0] : "-" }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    itemsData: {
+      default: () => {},
+      type: Object,
+    },
+  },
+  methods: {
+    onLoadError() {
+      console.log('here');
+    }
+  }
+};
+</script>
 <style scoped>
 .home-item {
   width: 22%;
@@ -24,9 +56,13 @@
   height: 100%;
 }
 .card_img {
-  background-color: pink;
   width: 100%;
   height: 150px;
+  border-radius: 4px 4px 0 0;
+}
+.card_img img{
+  width: 100%;
+  height: 100%;
   border-radius: 4px 4px 0 0;
 }
 .card_text {
@@ -35,18 +71,22 @@
 .title {
   margin-top: 30px;
 }
+.card-title {
+  display: flex;
+  align-items: center;
+}
 @media (max-width: 1199px) {
   .home-item {
     width: 28%;
   }
 }
-@media (max-width: 992px){
+@media (max-width: 992px) {
   .home-item {
     width: 45%;
   }
 }
-@media (max-width: 768px){
-.home-item {
+@media (max-width: 768px) {
+  .home-item {
     width: 100%;
   }
 }
