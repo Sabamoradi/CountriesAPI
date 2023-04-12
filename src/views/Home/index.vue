@@ -9,8 +9,8 @@
         <div class="right-section">
           <filters
             :listItem="listItem"
-            @setItemData="setItemData"
-            @resetAllFilter="fetchCountriesData"
+            @setItemData="setFilter"
+            @resetAllFilter="resetAllFilter"
           />
         </div>
       </div>
@@ -80,6 +80,10 @@ export default {
     this.fetchCountriesData();
   },
   methods: {
+    resetAllFilter() {
+      this.$router.replace({ query: { region: undefined } });
+      this.fetchCountriesData()
+    },
     async fetchCountriesData() {
       this.showLoading = true;
       try {
@@ -90,11 +94,19 @@ export default {
         }
       } catch (error) {}
     },
+    setFilter(val) {
+      if(this.listData.length > 0){
+        this.setItemData(val)
+      }else{
+        return
+      }
+    },
     async setItemData(val) {
       this.showLoading = true;
       try {
         const respose = await this.$httpCall.get(`/region/${val.text}`);
         if (respose && respose.status === 200) {
+          this.$router.replace({ query: { region: val.text } });
           this.showLoading = false;
           this.listData = respose.data;
         }
