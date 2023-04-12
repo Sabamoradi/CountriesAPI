@@ -87,4 +87,34 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+@media (max-width: 1199px) {
+  .right-section{
+    width: 22%;
+  }
+  .cards-wrapper {
+    gap:75px
+  }
+}
+@media (max-width: 992px){
+  .cards-wrapper{
+    gap:10px;
+    justify-content: space-between;
+  }
+  .second-wrapper{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .right-section{
+    width: 35%;
+    margin-top: 40px;
+  }
+  .left-section {
+    width: 100%;
+  }
+}
+@media (max-width: 592px){
+.right-section{
+  width: 80%;
+}
+}
 </style>

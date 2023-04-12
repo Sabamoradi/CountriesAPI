@@ -35,4 +35,19 @@
 .title {
   margin-top: 30px;
 }
+@media (max-width: 1199px) {
+  .home-item {
+    width: 28%;
+  }
+}
+@media (max-width: 992px){
+  .home-item {
+    width: 45%;
+  }
+}
+@media (max-width: 768px){
+.home-item {
+    width: 100%;
+  }
+}
 </style>

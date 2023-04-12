@@ -45,13 +45,18 @@ export default {
 };
 </script>
 <style scoped>
+.input-conatiner{
+  position: relative;
+  height: 60px;
+}
 .custom-input {
   border-color: transparent;
-  height: 60px;
+  height: 100%;
+  position: absolute;
   box-shadow: 1px 3px 7px 3px var(--box-shadow-light);
-  padding: 0 20px;
   width: 100%;
   border-radius: 4px;
+  text-indent: 20px;
 }
 .custom-input:focus{
     outline: none;
