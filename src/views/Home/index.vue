@@ -37,32 +37,32 @@ export default {
     HomeCard,
     Filters,
   },
-  data(){
-    return{
-      listItem:[
+  data() {
+    return {
+      listItem: [
         {
-          id:1,
-          text:'Africa'
+          id: 1,
+          text: 'Africa',
         },
         {
-          id:2,
-          text:'America'
+          id: 2,
+          text: 'America',
         },
         {
-          id:3,
-          text:'Asia'
+          id: 3,
+          text: 'Asia',
         },
         {
-          id:4,
-          text:'Europe'
+          id: 4,
+          text: 'Europe',
         },
         {
-          id:5,
-          text:'Oceania'
+          id: 5,
+          text: 'Oceania',
         },
-      ]
-    }
-  }
+      ],
+    };
+  },
 };
 </script>
 <style scoped>
