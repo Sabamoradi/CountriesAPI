@@ -4,6 +4,7 @@
       <div class="icon"></div>
     </template>
     <input
+      class="custom-input size-14"
       :type="type"
       :placeholder="placeText"
       :value="value"
@@ -43,3 +44,16 @@ export default {
   },
 };
 </script>
+<style scoped>
+.custom-input {
+  border-color: transparent;
+  height: 60px;
+  box-shadow: 1px 3px 7px 3px var(--box-shadow-light);
+  padding: 0 20px;
+  width: 100%;
+  border-radius: 4px;
+}
+.custom-input:focus{
+    outline: none;
+}
+</style>

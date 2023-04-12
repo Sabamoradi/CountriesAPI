@@ -18,12 +18,13 @@
 <style scoped>
 .top-menu_container {
   box-shadow: 0 4px 5px -1px var(--box-shadow);
+  background-color: var(--white);
 }
 .top-menu_wrapper {
   display: flex;
   justify-content: space-between;
-  height: 69px;
+  height: 80px;
+
   align-items: center;
-  
 }
 </style>

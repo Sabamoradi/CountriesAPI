@@ -31,11 +31,16 @@
 :root {
   --main-color: #317eeb;
   --hover-color: #2764ba;
-  --body-color: #e0e0e0;
+  --white:#fff;
+  --body-color: hsl(0, 0%, 98%);
   --box-shadow: #0000001f;
+  --box-shadow-light: #0000000f;
 }
 * {
   font-family: Nunito Sans;
+}
+body {
+  background-color: var(--body-color);
 }
 body,
 p {
