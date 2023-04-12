@@ -4,7 +4,7 @@
     <div class="second-section">
       <div class="container second-wrapper">
         <div class="left-section">
-          <text-input :placeText="'search for a country ...'" />
+          <text-input :placeText="'search for a country ...'" @searchData="searchData"/>
         </div>
         <div class="right-section">
           <filters
@@ -82,7 +82,7 @@ export default {
   methods: {
     resetAllFilter() {
       this.$router.replace({ query: { region: undefined } });
-      this.fetchCountriesData()
+      this.fetchCountriesData();
     },
     async fetchCountriesData() {
       this.showLoading = true;
@@ -95,10 +95,10 @@ export default {
       } catch (error) {}
     },
     setFilter(val) {
-      if(this.listData.length > 0){
-        this.setItemData(val)
-      }else{
-        return
+      if (this.listData.length > 0) {
+        this.setItemData(val);
+      } else {
+        return;
       }
     },
     async setItemData(val) {
@@ -112,6 +112,9 @@ export default {
         }
       } catch (error) {}
     },
+    searchData(data) {
+      console.log(data);
+    }
   },
 };
 </script>

@@ -10,6 +10,7 @@
       :value="value"
       :name="name"
       v-model="innerValue"
+      @input="searchData($event)"
     />
   </div>
 </template>
@@ -21,31 +22,44 @@ export default {
       default: false,
     },
     type: {
-      default: 'text',
+      default: "text",
       type: String,
     },
     placeText: {
-      default: '',
+      default: "",
       type: String,
     },
     value: {
-      default: '',
+      default: "",
       type: String,
     },
     name: {
-      default: '',
+      default: "",
       type: String,
     },
   },
   data() {
     return {
-      innerValue: '',
+      innerValue: "",
+      timeOutId:null,
+      latestSearchValue:'',
+      oldSearchValue:''
     };
+  },
+  methods: {
+    searchData(e) {
+      clearTimeout(this.timeOutId);
+      this.latestSearchValue = e.target.value;
+      this.timeOutId = setTimeout(() => {
+        this.oldSearchValue = e.target.value;
+        this.$emit('searchData',this.oldSearchValue)
+      }, 2000);
+    },
   },
 };
 </script>
 <style scoped>
-.input-conatiner{
+.input-conatiner {
   position: relative;
   height: 60px;
 }
@@ -58,7 +72,7 @@ export default {
   border-radius: 4px;
   text-indent: 20px;
 }
-.custom-input:focus{
-    outline: none;
+.custom-input:focus {
+  outline: none;
 }
 </style>
