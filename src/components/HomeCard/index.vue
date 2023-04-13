@@ -65,6 +65,12 @@ export default {
 }
 .title {
   margin-top: 30px;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }
 .card-title {
   display: flex;

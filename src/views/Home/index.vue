@@ -91,7 +91,6 @@ export default {
       }else{
         this.fetchCountriesData();
       }
-      console.log(this.$route.query , 'route');
     },
     resetAllFilter() {
       this.$router.replace({ query: { region: undefined , searching:undefined } });
@@ -100,10 +99,10 @@ export default {
     async fetchCountriesData() {
       this.showLoading = true;
       try {
-        const respose = await this.$httpCall.get("/all");
-        if (respose && respose.status === 200) {
+        const response = await this.$httpCall.get("/all");
+        if (response && response.status === 200) {
           this.showLoading = false;
-          this.listData = respose.data;
+          this.listData = response.data;
         }
       } catch (error) {}
     },
@@ -117,11 +116,11 @@ export default {
     async setItemData(val) {
       this.showLoading = true;
       try {
-        const respose = await this.$httpCall.get(`/region/${val.text}`);
-        if (respose && respose.status === 200) {
+        const response = await this.$httpCall.get(`/region/${val.text}`);
+        if (response && response.status === 200) {
           this.$router.replace({ query: { region: val.text , searching:true } });
           this.showLoading = false;
-          this.listData = respose.data;
+          this.listData = response.data;
         }
       } catch (error) {}
     },
@@ -137,11 +136,11 @@ export default {
     async searchData(data) {
       this.showLoading = true
       try {
-        const respose = await this.$httpCall.get(`/name/${data}`);
-        if (respose && respose.status === 200) {
+        const response = await this.$httpCall.get(`/name/${data}`);
+        if (response && response.status === 200) {
           this.$router.replace({ query: { country: data , searching:true } });
           this.showLoading = false;
-          this.listData = respose.data;
+          this.listData = response.data;
         }
       } catch (error) {
         
