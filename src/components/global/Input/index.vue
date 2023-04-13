@@ -46,6 +46,18 @@ export default {
       oldSearchValue:''
     };
   },
+  watch: {
+		'$route.query': {
+      immediate:true,
+      handler(newVal) {
+        if(this.$route.query.country){
+          this.oldSearchValue = this.$route.query.country;
+          this.innerValue = this.$route.query.country
+        }
+      }
+			
+		},
+	},
   methods: {
     searchData(e) {
       clearTimeout(this.timeOutId);

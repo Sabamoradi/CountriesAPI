@@ -4,7 +4,7 @@
     <div class="second-section">
       <div class="container second-wrapper">
         <div class="left-section">
-          <text-input :placeText="'search for a country ...'" @searchData="searchData"/>
+          <text-input :placeText="'search for a country ...'" @searchData="searchCountry"/>
         </div>
         <div class="right-section">
           <filters
@@ -77,11 +77,24 @@ export default {
     };
   },
   created() {
-    this.fetchCountriesData();
+    this.checkRoute()
+    
   },
   methods: {
+    checkRoute() {
+      if(this.$route.query.searching){
+        if(this.$route.query.region){
+          this.setItemData(this.$route.query.region)
+        }else{
+          this.searchData(this.$route.query.country)
+        }
+      }else{
+        this.fetchCountriesData();
+      }
+      console.log(this.$route.query , 'route');
+    },
     resetAllFilter() {
-      this.$router.replace({ query: { region: undefined } });
+      this.$router.replace({ query: { region: undefined , searching:undefined } });
       this.fetchCountriesData();
     },
     async fetchCountriesData() {
@@ -106,14 +119,33 @@ export default {
       try {
         const respose = await this.$httpCall.get(`/region/${val.text}`);
         if (respose && respose.status === 200) {
-          this.$router.replace({ query: { region: val.text } });
+          this.$router.replace({ query: { region: val.text , searching:true } });
           this.showLoading = false;
           this.listData = respose.data;
         }
       } catch (error) {}
     },
-    searchData(data) {
-      console.log(data);
+    searchCountry(item){
+      if(item){
+        this.searchData(item)
+      }else{
+        this.$router.replace({ query: { country: undefined , searching:undefined } });
+        this.fetchCountriesData()
+      }
+      
+    },
+    async searchData(data) {
+      this.showLoading = true
+      try {
+        const respose = await this.$httpCall.get(`/name/${data}`);
+        if (respose && respose.status === 200) {
+          this.$router.replace({ query: { country: data , searching:true } });
+          this.showLoading = false;
+          this.listData = respose.data;
+        }
+      } catch (error) {
+        
+      }
     }
   },
 };

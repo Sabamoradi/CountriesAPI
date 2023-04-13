@@ -7,9 +7,9 @@
       >
         {{ regionText }}
       </p>
-      <div @click="resetAllFilter">
-        <i v-if="!resetFilter">icon</i>
-        <i v-else>reset</i>
+      <div>
+        <i v-if="!resetFilter" @click="openMenu = !openMenu">icon</i>
+        <i v-else @click="resetAllFilter">reset</i>
       </div>
     </div>
     <div class="second-section" :class="{ 'show-menu': openMenu }">
