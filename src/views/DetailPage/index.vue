@@ -3,7 +3,7 @@
     <top-menu />
     <div class="second-container mt-5">
       <div class="container">
-        <div class="btn-back">
+        <div class="btn-back" @click="goBack">
           <i class="fa-solid fa-arrow-left"></i>
           <p>Back</p>
         </div>
@@ -70,6 +70,9 @@ export default {
     this.getCountriesData();
   },
   methods: {
+    goBack() {
+      this.$router.replace("/");
+    },
     async getCountriesData() {
       console.log(this.$route.params.ccn);
       this.showLoading = true;
@@ -95,6 +98,7 @@ export default {
   height: 40px;
   border-radius: 4px;
   align-items: center;
+  cursor: pointer;
 }
 .data-container {
   width: 100%;
@@ -107,6 +111,7 @@ export default {
 .data-left img {
   height: 400px;
 }
+
 .data-right {
   width: 45%;
   margin-top: 40px;
@@ -122,5 +127,41 @@ export default {
 .data-right_wrapper {
   display: flex;
   justify-content: space-between;
+}
+@media (max-width: 992px) {
+  .data-left img {
+    height: 300px;
+  }
+  .btn-back {
+    width: 15%;
+  }
+}
+@media (max-width: 768px) {
+  .data-left img {
+    height: 250px;
+  }
+  .btn-back {
+    width: 20%;
+  }
+}
+@media (max-width: 592px) {
+  .data-container {
+    flex-direction: column;
+  }
+  .data-left{
+    width: 100%;
+  }
+  .data-left img {
+    height: 200px;
+  }
+  .data-right {
+    width: 100%;
+  }
+  .data-right_wrapper {
+    flex-direction: column;
+  }
+  .btn-back {
+    width: 30%;
+  }
 }
 </style>

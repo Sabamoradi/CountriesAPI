@@ -47,6 +47,7 @@ export default {
 .home-item {
   width: 22%;
   margin-bottom: 30px;
+  cursor: pointer;
 }
 .card_wrapper {
   background-color: var(--white);
