@@ -8,6 +8,7 @@ import './utils/globalLibraries';
 
 Vue.config.productionTip = false;
 Vue.prototype.$httpCall = HTTPCALL;
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

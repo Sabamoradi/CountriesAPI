@@ -24,6 +24,7 @@
               v-for="index in listData"
               :itemsData="index"
               :key="`${index.name.common}-card`"
+              @goToDetail="goToDetail"
             />
           </div>
         </div>
@@ -114,20 +115,26 @@ export default {
       }
     },
     async setItemData(val) {
+      let regionItem = null
+      if(val.text){
+        regionItem = val.text
+      }else{
+        regionItem = val
+      }
       this.showLoading = true;
       try {
-        const response = await this.$httpCall.get(`/region/${val.text}`);
+        const response = await this.$httpCall.get(`/region/${regionItem}`);
         if (response && response.status === 200) {
-          this.$router.replace({ query: { region: val.text , searching:true } });
+          this.$router.replace({ query: { region: regionItem , searching:true } });
           this.showLoading = false;
           this.listData = response.data;
         }
       } catch (error) {}
     },
     searchCountry(item){
-      if(item){
+      if(item) {
         this.searchData(item)
-      }else{
+      } else {
         this.$router.replace({ query: { country: undefined , searching:undefined } });
         this.fetchCountriesData()
       }
@@ -145,6 +152,10 @@ export default {
       } catch (error) {
         
       }
+    },
+    goToDetail(val) {
+      this.$router.replace(`/detail/${val.cca3}`)
+      console.log('fff',val.cca3);
     }
   },
 };

@@ -66,9 +66,10 @@ export default {
   },
   methods: {
     async getCountriesData() {
+        console.log(this.$route.params.ccn);
       this.showLoading = true;
       try {
-        const response = await this.$httpCall.get(`/alpha/irn`);
+        const response = await this.$httpCall.get(`/alpha/${this.$route.params.ccn}`);
         if (response && response.status === 200) {
           this.showLoading = false;
           this.countryData = response.data[0];

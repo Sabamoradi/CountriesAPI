@@ -13,7 +13,7 @@ export default new Router({
       component: Main,
     },
     {
-      path: '/detail',
+      path: '/detail/:ccn',
       name: 'detail',
       component: DetailPage,
     },

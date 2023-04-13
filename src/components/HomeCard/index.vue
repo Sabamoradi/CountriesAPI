@@ -1,5 +1,5 @@
 <template>
-  <div class="home-item">
+  <div class="home-item" @click="goToDetail">
     <div class="card_wrapper">
       <div class="card_img">
         <img :src="itemsData.flags.png" :alt="itemsData.flags.alt" loading="lazy" />
@@ -36,6 +36,11 @@ export default {
       type: Object,
     },
   },
+  methods: {
+    goToDetail() {
+      this.$emit('goToDetail',this.itemsData)
+    }
+  }
 };
 </script>
 <style scoped>
