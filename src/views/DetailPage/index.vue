@@ -39,6 +39,12 @@
                     <span class="size-14">{{ countryData.capital[0] }}</span>
                   </div>
                 </div>
+                <div class="data-right_items">
+                  <div class="border_wrapper">
+                    <p class="size-14 font-bold">Border Countries:</p>
+                    <div class="data_item_border size-14">aaa</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -128,6 +134,22 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+.border_wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.data_item_border {
+  height: 30px;
+  background: var(--white);
+  box-shadow: 1px 3px 7px 3px var(--box-shadow);
+  padding: 0 20px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  border-radius: 4px;
+}
 @media (max-width: 992px) {
   .data-left img {
     height: 300px;
@@ -143,12 +165,15 @@ export default {
   .btn-back {
     width: 20%;
   }
-}
-@media (max-width: 592px) {
+  .data-right_wrapper {
+    flex-direction: column;
+  }
   .data-container {
     flex-direction: column;
   }
-  .data-left{
+}
+@media (max-width: 592px) {
+  .data-left {
     width: 100%;
   }
   .data-left img {
@@ -157,9 +182,7 @@ export default {
   .data-right {
     width: 100%;
   }
-  .data-right_wrapper {
-    flex-direction: column;
-  }
+
   .btn-back {
     width: 30%;
   }

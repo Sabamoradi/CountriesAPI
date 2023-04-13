@@ -96,5 +96,8 @@ export default {
   .home-item {
     width: 100%;
   }
+  .card_img{
+    height: 200px;
+  }
 }
 </style>
