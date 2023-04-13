@@ -40,22 +40,21 @@ export default {
   },
   data() {
     return {
-      innerValue: "",
-      timeOutId:null,
-      latestSearchValue:'',
-      oldSearchValue:''
+      innerValue: '',
+      timeOutId: null,
+      latestSearchValue: '',
+      oldSearchValue: '',
     };
   },
   watch: {
 		'$route.query': {
-      immediate:true,
-      handler(newVal) {
-        if(this.$route.query.country){
+      immediate: true,
+      handler() {
+        if (this.$route.query.country) {
           this.oldSearchValue = this.$route.query.country;
-          this.innerValue = this.$route.query.country
+          this.innerValue = this.$route.query.country;
         }
-      }
-			
+      },
 		},
 	},
   methods: {
@@ -64,7 +63,7 @@ export default {
       this.latestSearchValue = e.target.value;
       this.timeOutId = setTimeout(() => {
         this.oldSearchValue = e.target.value;
-        this.$emit('searchData',this.oldSearchValue)
+        this.$emit('searchData', this.oldSearchValue);
       }, 2000);
     },
   },

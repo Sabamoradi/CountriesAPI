@@ -55,7 +55,7 @@ export default {
     TextInput,
     HomeCard,
     Filters,
-    LoadingSvg
+    LoadingSvg,
   },
   data() {
     return {

@@ -38,9 +38,9 @@ export default {
   },
   methods: {
     goToDetail() {
-      this.$emit('goToDetail',this.itemsData)
-    }
-  }
+      this.$emit('goToDetail', this.itemsData);
+    },
+  },
 };
 </script>
 <style scoped>

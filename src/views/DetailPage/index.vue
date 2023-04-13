@@ -85,8 +85,7 @@ export default {
   },
   watch: {
 		'$route'() {
-      this.getCountriesData()
-			
+      this.getCountriesData();
 		},
 	},
   methods: {
@@ -97,7 +96,7 @@ export default {
       this.showLoading = true;
       try {
         const response = await this.$httpCall.get(
-          `/alpha/${this.$route.params.ccn}`
+          `/alpha/${this.$route.params.ccn}`,
         );
         if (response && response.status === 200) {
           this.showLoading = false;
@@ -107,7 +106,7 @@ export default {
     },
     changeDetail(item) {
       this.$router.push(`/detail/${item}`);
-    }
+    },
   },
 };
 </script>
