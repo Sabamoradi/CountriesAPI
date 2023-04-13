@@ -39,10 +39,18 @@
                     <span class="size-14">{{ countryData.capital[0] }}</span>
                   </div>
                 </div>
-                <div class="data-right_items">
-                  <div class="border_wrapper">
-                    <p class="size-14 font-bold">Border Countries:</p>
-                    <div class="data_item_border size-14">aaa</div>
+                <div class="data-right_items"></div>
+              </div>
+              <div class="border_wrapper">
+                <p class="size-14 font-bold">Border Countries:</p>
+                <div class="data-item_wrapper">
+                  <div
+                    class="data_item_border size-14"
+                    v-for="(index, item) in countryData.borders"
+                    :key="`${item}-border`"
+                    @click="changeDetail(index)"
+                  >
+                    {{ index }}
                   </div>
                 </div>
               </div>
@@ -75,12 +83,17 @@ export default {
   created() {
     this.getCountriesData();
   },
+  watch: {
+		'$route'() {
+      this.getCountriesData()
+			
+		},
+	},
   methods: {
     goBack() {
       this.$router.replace("/");
     },
     async getCountriesData() {
-      console.log(this.$route.params.ccn);
       this.showLoading = true;
       try {
         const response = await this.$httpCall.get(
@@ -92,6 +105,9 @@ export default {
         }
       } catch (error) {}
     },
+    changeDetail(item) {
+      this.$router.push(`/detail/${item}`);
+    }
   },
 };
 </script>
@@ -134,15 +150,21 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+.data-item_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
 .border_wrapper {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  margin-top: 20px;
 }
 .data_item_border {
   height: 30px;
   background: var(--white);
-  box-shadow: 1px 3px 7px 3px var(--box-shadow);
+  border: 1px solid #ccc;
   padding: 0 20px;
   width: fit-content;
   display: flex;
@@ -171,6 +193,9 @@ export default {
   .data-container {
     flex-direction: column;
   }
+  .data-right {
+    width: 100%;
+  }
 }
 @media (max-width: 592px) {
   .data-left {
@@ -178,9 +203,6 @@ export default {
   }
   .data-left img {
     height: 200px;
-  }
-  .data-right {
-    width: 100%;
   }
 
   .btn-back {

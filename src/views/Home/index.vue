@@ -165,7 +165,6 @@ export default {
     },
     goToDetail(val) {
       this.$router.replace(`/detail/${val.cca3}`);
-      console.log("fff", val.cca3);
     },
   },
 };
