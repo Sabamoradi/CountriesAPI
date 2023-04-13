@@ -8,8 +8,12 @@
         {{ regionText }}
       </p>
       <div>
-        <i v-if="!resetFilter" @click="openMenu = !openMenu">icon</i>
-        <i v-else @click="resetAllFilter">reset</i>
+        <i
+          v-if="!resetFilter"
+          @click="openMenu = !openMenu"
+          class="fa-sharp fa-solid fa-angle-up"
+        ></i>
+        <i v-else @click="resetAllFilter" class="fa-solid fa-xmark"></i>
       </div>
     </div>
     <div class="second-section" :class="{ 'show-menu': openMenu }">
@@ -37,7 +41,7 @@ export default {
   data() {
     return {
       openMenu: false,
-      regionText: 'Filter by Region',
+      regionText: "Filter by Region",
       resetFilter: false,
     };
   },
@@ -46,12 +50,12 @@ export default {
       this.regionText = value.text;
       this.openMenu = false;
       this.resetFilter = true;
-      this.$emit('setItemData', value);
+      this.$emit("setItemData", value);
     },
     resetAllFilter() {
-      this.regionText = 'Filter by Region';
+      this.regionText = "Filter by Region";
       this.resetFilter = false;
-      this.$emit('resetAllFilter');
+      this.$emit("resetAllFilter");
     },
   },
 };

@@ -4,7 +4,10 @@
     <div class="second-section">
       <div class="container second-wrapper">
         <div class="left-section">
-          <text-input :placeText="'search for a country ...'" @searchData="searchCountry"/>
+          <text-input
+            :placeText="'search for a country ...'"
+            @searchData="searchCountry"
+          />
         </div>
         <div class="right-section">
           <filters
@@ -16,7 +19,9 @@
       </div>
     </div>
     <div class="third-section">
-      <template v-if="showLoading"> loading </template>
+      <template v-if="showLoading">
+        <loading-svg />
+      </template>
       <template v-else>
         <div class="container">
           <div class="cards-wrapper">
@@ -42,12 +47,15 @@ import HomeCard from "@/components/HomeCard";
 
 import Filters from "@/components/global/Filters";
 
+import LoadingSvg from '@/components/global/loading';
+
 export default {
   components: {
     TopMenu,
     TextInput,
     HomeCard,
     Filters,
+    LoadingSvg
   },
   data() {
     return {
@@ -78,23 +86,24 @@ export default {
     };
   },
   created() {
-    this.checkRoute()
-    
+    this.checkRoute();
   },
   methods: {
     checkRoute() {
-      if(this.$route.query.searching){
-        if(this.$route.query.region){
-          this.setItemData(this.$route.query.region)
-        }else{
-          this.searchData(this.$route.query.country)
+      if (this.$route.query.searching) {
+        if (this.$route.query.region) {
+          this.setItemData(this.$route.query.region);
+        } else {
+          this.searchData(this.$route.query.country);
         }
-      }else{
+      } else {
         this.fetchCountriesData();
       }
     },
     resetAllFilter() {
-      this.$router.replace({ query: { region: undefined , searching:undefined } });
+      this.$router.replace({
+        query: { region: undefined, searching: undefined },
+      });
       this.fetchCountriesData();
     },
     async fetchCountriesData() {
@@ -115,48 +124,49 @@ export default {
       }
     },
     async setItemData(val) {
-      let regionItem = null
-      if(val.text){
-        regionItem = val.text
-      }else{
-        regionItem = val
+      let regionItem = null;
+      if (val.text) {
+        regionItem = val.text;
+      } else {
+        regionItem = val;
       }
       this.showLoading = true;
       try {
         const response = await this.$httpCall.get(`/region/${regionItem}`);
         if (response && response.status === 200) {
-          this.$router.replace({ query: { region: regionItem , searching:true } });
+          this.$router.replace({
+            query: { region: regionItem, searching: true },
+          });
           this.showLoading = false;
           this.listData = response.data;
         }
       } catch (error) {}
     },
-    searchCountry(item){
-      if(item) {
-        this.searchData(item)
+    searchCountry(item) {
+      if (item) {
+        this.searchData(item);
       } else {
-        this.$router.replace({ query: { country: undefined , searching:undefined } });
-        this.fetchCountriesData()
+        this.$router.replace({
+          query: { country: undefined, searching: undefined },
+        });
+        this.fetchCountriesData();
       }
-      
     },
     async searchData(data) {
-      this.showLoading = true
+      this.showLoading = true;
       try {
         const response = await this.$httpCall.get(`/name/${data}`);
         if (response && response.status === 200) {
-          this.$router.replace({ query: { country: data , searching:true } });
+          this.$router.replace({ query: { country: data, searching: true } });
           this.showLoading = false;
           this.listData = response.data;
         }
-      } catch (error) {
-        
-      }
+      } catch (error) {}
     },
     goToDetail(val) {
-      this.$router.replace(`/detail/${val.cca3}`)
-      console.log('fff',val.cca3);
-    }
+      this.$router.replace(`/detail/${val.cca3}`);
+      console.log("fff", val.cca3);
+    },
   },
 };
 </script>

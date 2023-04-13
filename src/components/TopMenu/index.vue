@@ -6,7 +6,7 @@
       </div>
       <div class="top-menu_btn">
         <div class="icon">
-          <i></i>
+          <i class="fa-regular fa-moon"></i>
         </div>
         <div class="text">
           <p class="font-semi-bold size-16">Dark Mode</p>
@@ -26,5 +26,13 @@
   height: 80px;
 
   align-items: center;
+}
+.top-menu_btn{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.icon{
+  padding-right: 10px;
 }
 </style>

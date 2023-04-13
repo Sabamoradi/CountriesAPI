@@ -4,10 +4,12 @@
     <div class="second-container mt-5">
       <div class="container">
         <div class="btn-back">
-          <i>icon</i>
+          <i class="fa-solid fa-arrow-left"></i>
           <p>Back</p>
         </div>
-        <template v-if="showLoading"> hello </template>
+        <template v-if="showLoading">
+          <loading-svg />
+        </template>
         <template v-else>
           <div class="data-container mt-5">
             <div class="data-left">
@@ -50,10 +52,13 @@ import TopMenu from "@/components/TopMenu";
 
 import baseImage from "@/components/global/Image";
 
+import LoadingSvg from "@/components/global/loading";
+
 export default {
   components: {
     TopMenu,
     baseImage,
+    LoadingSvg,
   },
   data() {
     return {
@@ -66,10 +71,12 @@ export default {
   },
   methods: {
     async getCountriesData() {
-        console.log(this.$route.params.ccn);
+      console.log(this.$route.params.ccn);
       this.showLoading = true;
       try {
-        const response = await this.$httpCall.get(`/alpha/${this.$route.params.ccn}`);
+        const response = await this.$httpCall.get(
+          `/alpha/${this.$route.params.ccn}`
+        );
         if (response && response.status === 200) {
           this.showLoading = false;
           this.countryData = response.data[0];
@@ -112,8 +119,8 @@ export default {
   align-items: center;
   margin-top: 10px;
 }
-.data-right_wrapper{
-    display: flex;
-    justify-content: space-between;
+.data-right_wrapper {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
